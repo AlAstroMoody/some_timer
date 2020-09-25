@@ -1,17 +1,23 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <transition-group name="fade" mode="out-in" class="body">
+      <stop-watch class="stopwatch" v-for="timer in timers" :key="timer" />
+      <stop-watch class="stopwatch" newStopwatch @addNew="timers++" key="new" />
+    </transition-group>
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
-
+import StopWatch from "@/components/StopWatch";
 export default {
   name: "App",
+  data() {
+    return {
+      timers: 0
+    };
+  },
   components: {
-    HelloWorld
+    StopWatch
   }
 };
 </script>
@@ -19,10 +25,52 @@ export default {
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  background: #353638;
+  height: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
+.body {
+  display: flex;
+  align-items: center;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  margin: 47px auto;
+}
+
+.stopwatch {
+  margin: 25px;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+@media screen and (min-width: 320px) {
+  .body {
+    max-width: 320px;
+    justify-content: center;
+  }
+}
+@media screen and (min-width: 768px) {
+  .body {
+    max-width: 550px;
+    justify-content: normal;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .body {
+    max-width: 825px;
+  }
 }
 </style>

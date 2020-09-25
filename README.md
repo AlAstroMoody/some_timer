@@ -1,4 +1,6 @@
-# some_timer
+# Таймер
+
+https://alastromoody.github.io/some_timer/
 
 ## Project setup
 ```
